@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+
+  db:
+    image: mariadb
+    volumes:
+      - /var/lib/mysql
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+      MYSQL_DATABASE: "quirky"
+      MYSQL_USER: "quirky"
+      MYSQL_PASSWORD: "quirky"
+
+  quirky:
+    build: quirky
+    ports:
+      - 8080:80
+    volumes:
+      - /var/www/html/modules
+      - /var/www/html/profiles
+      - /var/www/html/themes
+      - /var/www/html/sites
+      - .:/tools:rw
